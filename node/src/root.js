@@ -3,7 +3,7 @@ const root = (pool) => {
         getUsers: async () => {
             try {
                 const client = await pool.connect();
-                const result = await client.query('SELECT * FROM users');
+                const result = await client.query('SELECT id, name, email FROM users');
                 client.release();
 
                 return result.rows;
@@ -13,11 +13,11 @@ const root = (pool) => {
             }
         },
 
-        searchUsers: async (args) => {
+        getUser: async (args) => {
             const { id } = args;
             try {
                 const client = await pool.connect();
-                const result = await client.query('SELECT * FROM users WHERE id = $1', [id]);
+                const result = await client.query('SELECT id, name, email FROM users WHERE id = $1', [id]);
                 client.release();
 
                 return result.rows;
@@ -27,11 +27,11 @@ const root = (pool) => {
             }
         },
 
-        searchUsers_sqli: async (args) => {
+        getUser_sqli: async (args) => {
             const { id } = args;
             try {
                 const client = await pool.connect();
-                const result = await client.query('SELECT * FROM users WHERE id = ' + String(id));
+                const result = await client.query('SELECT id, name, email FROM users WHERE id = ' + String(id));
                 client.release();
 
                 return result.rows;

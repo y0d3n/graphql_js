@@ -9,6 +9,8 @@ const schema = buildSchema(`
 
   type Query {
     getUsers: [User]
+    searchUsers(id: ID!): [User]
+    searchUsers_sqli(id: ID!): [User]
   }
 `);
 

@@ -5,6 +5,7 @@ const schema = buildSchema(`
     id: ID!
     name: String!
     email: String!
+    followers: [User]
   }
 
   type Query {
